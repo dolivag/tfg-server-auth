@@ -16,4 +16,4 @@ node_modules
 
 .expo
 
-firebase-key.json
+src/config/firebase-key.json
