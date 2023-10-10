@@ -35,14 +35,17 @@ router.post(SIGNUP_ROUTE,
             .withMessage('House ID must be provided')
     ],
     async (req, res) => {
+        console.log("Got request!");
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
+            console.log(errors.array());
             return res.status(400).send({
                 errors: errors.array()
             });
         }
 
+        console.log("No errors!");
         const userRepository = new UserRepository(firebase.db);
         const user = await userRepository.findByEmail(req.body.email);
         console.log(user);
@@ -62,8 +65,7 @@ router.post(SIGNUP_ROUTE,
                 }]
             });
         }
-
-        return res.status(200).send('Signing Up');
+        return res.status(200).send(newUser);
     }
 );
 
